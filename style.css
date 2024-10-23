@@ -4,6 +4,12 @@ body {
   margin: 0;
 }
 
+h1 {
+  text-align: center;
+  font-size: 3rem;
+  font-style: oblique;
+}
+
 .container {
   width: 100%;
   height: fit-content;
@@ -26,19 +32,38 @@ body {
   margin: 10px;
 }
 
+.book-card button {
+  margin: 5px;
+}
+
 .add-book-button {
   display: block;
   margin: 20px auto 0;
 }
 
 .new-book-menu {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   border-radius: 0 10px 10px 0;
   padding: 20px;
   background-color: cadetblue;
   width: 300px;
   position: fixed;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.218);
 }
 
 .hidden {
   display: none;
+}
+
+fieldset {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.close-menu {
+  width: 2rem;
+  align-self: end;
 }

@@ -127,3 +127,11 @@ addBookButton.addEventListener("click", (e) => {
   addBooks();
   bookForm.reset();
 });
+
+const closeButton = document.querySelector(".close-menu");
+closeButton.addEventListener("click", () => {
+  newBookForm.classList.toggle("hidden");
+  newBookButton.innerText === "NEW BOOK"
+    ? (newBookButton.innerText = "CLOSE MENU")
+    : (newBookButton.innerText = "NEW BOOK");
+});
