@@ -8,9 +8,10 @@ function Book(author, title, description, pages, read) {
   this.read = read;
 }
 
-function addBookToLibrary() {
-  // myLibrary.push(prompt("Add a book:"));
-}
+// Prototype method for toggling the read status
+Book.prototype.toggleReadStatus = function () {
+  this.read = !this.read;
+};
 
 const description = "This is just a placeholder description of a sample book to display nicely on my page!";
 
@@ -23,7 +24,7 @@ myLibrary.push(skillBook), myLibrary.push(funBook), myLibrary.push(cookBook);
 const main = document.querySelector("main");
 
 function addBooks() {
-  for (let book of myLibrary) {
+  myLibrary.forEach((book, index) => {
     // Create the container for a card element
     const bookCard = document.createElement("div");
     bookCard.className = "book-card";
@@ -48,16 +49,44 @@ function addBooks() {
     const read = document.createElement("p");
     read.innerText = book.read ? "You've already read this book!" : "You haven't read this book yet";
 
+    // Button to delete the book
+    const deleteButton = document.createElement("button");
+    deleteButton.innerText = "Remove";
+    deleteButton.setAttribute("data-index", index);
+
+    // Option to delete books from the library
+    deleteButton.addEventListener("click", (e) => {
+      const bookIndex = e.target.getAttribute("data-index");
+      myLibrary.splice(bookIndex, 1);
+      main.innerHTML = "";
+      addBooks();
+    });
+
+    // Button to toggle read status of the book
+    const readButton = document.createElement("button");
+    readButton.innerText = book.read ? "Unread" : "Read";
+    readButton.setAttribute("data-index", index);
+
+    // Option to toggle reading status
+    readButton.addEventListener("click", (e) => {
+      const bookIndex = e.target.getAttribute("data-index");
+      myLibrary[bookIndex].toggleReadStatus();
+      main.innerHTML = "";
+      addBooks();
+    });
+
     // Append all elements to the bookCard
     bookCard.appendChild(title);
     bookCard.appendChild(author);
     bookCard.appendChild(description);
     bookCard.appendChild(pages);
     bookCard.appendChild(read);
+    bookCard.appendChild(deleteButton);
+    bookCard.appendChild(readButton);
 
     // Append everything to the main container
     main.appendChild(bookCard);
-  }
+  });
 }
 
 addBooks();
@@ -96,4 +125,5 @@ addBookButton.addEventListener("click", (e) => {
   // Reset current book cards and render all new books
   main.innerHTML = "";
   addBooks();
+  bookForm.reset();
 });
