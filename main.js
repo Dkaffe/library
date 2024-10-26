@@ -1,11 +1,13 @@
 const myLibrary = [];
 
-function Book(author, title, description, pages, read) {
-  this.author = author;
-  this.title = title;
-  this.description = description;
-  this.pages = pages;
-  this.read = read;
+class Book {
+  constructor(author, title, description, pages, read) {
+    this.author = author;
+    this.title = title;
+    this.description = description;
+    this.pages = pages;
+    this.read = read;
+  }
 }
 
 // Prototype method for toggling the read status
